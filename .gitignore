@@ -1,0 +1,72 @@
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+__pytest_cache/
+*.py[cod]
+*$py.class
+# pyenv
+.python-version
+
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+
+### VisualStudioCode ###
+# .vscode/*
+# !.vscode/settings.json
+# !.vscode/tasks.json
+# .vscode/launch.json
+!.vscode/extensions.json
+.history
+.vscode
+
+
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+
+# Folder config file
+Desktop.ini
+
+# test database
+test.sqlite
+test.db
+test_setup.db
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# Build folder
+
+*/build/*
+
+# End of https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode
