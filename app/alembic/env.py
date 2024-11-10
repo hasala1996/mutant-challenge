@@ -1,18 +1,14 @@
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-
 from alembic import context
-
-from config.settings import settings
+from config import settings
+from sqlalchemy import engine_from_config, pool
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-from adapters.database.models.base_model import Base
-
 import adapters.database.models
+from adapters.database.models.base_model import Base
 
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
 if config.config_file_name is not None:

@@ -1,7 +1,7 @@
 """ Dependencies file for database
 """
 
-from config.settings import settings
+from config import settings
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 

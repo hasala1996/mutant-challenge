@@ -7,7 +7,8 @@ import os
 from dotenv import load_dotenv
 
 # Carga el archivo .env
-load_dotenv(os.path.join(os.path.dirname(__file__), "../.env"))
+# load_dotenv(".env")
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
 
 class Settings:
@@ -21,6 +22,7 @@ class Settings:
     """
 
     SECRET_KEY: str = os.getenv("SECRET_KEY", "")
+    print("SECRET_KEY", SECRET_KEY)
     DB_USER: str = os.getenv("DB_USER", "")
     DB_PASSWORD: str = os.getenv("DB_PASSWORD", "")
     DB_HOST: str = os.getenv("DB_HOST", "")
