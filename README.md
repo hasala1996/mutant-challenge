@@ -32,48 +32,48 @@
 # Hexagonal Architecture
 
 1. Endpoint (API Layer)
-The endpoint is the layer that exposes entry points to the application and allows interaction with external clients. In this project, endpoints are defined in adapters/api/endpoints.
+    The endpoint is the layer that exposes entry points to the application and allows interaction with external clients. In this project, endpoints are defined in adapters/api/endpoints.
 
-The endpoint to detect whether a DNA is mutant or not is /mutant/, and calls a core application service (MutantService) that handles the mutant detection logic.
+    The endpoint to detect whether a DNA is mutant or not is /mutant/, and calls a core application service (MutantService) that handles the mutant detection logic.
 
-Endpoint flow:
+    Endpoint flow:
 
-Receives the HTTP request and the DNA data.
-Calls the MutantService service to process the business logic.
-Returns the response to the client, indicating whether it is a mutant or not.
+    Receives the HTTP request and the DNA data.
+    Calls the MutantService service to process the business logic.
+    Returns the response to the client, indicating whether it is a mutant or not.
 
 2. Service (Core Service)
-The service (MutantService) is responsible for the business logic of the application. In this case, the service is located in core/mutant/services.py. The main function of the service is to verify if the DNA is mutant or human.
+    The service (MutantService) is responsible for the business logic of the application. In this case, the service is located in core/mutant/services.py. The main function of the service is to verify if the DNA is mutant or human.
 
-Service Responsibilities:
+    Service Responsibilities:
 
-Process mutant detection business logic.
-Use the DNA repository to access the database (for example, saving new sequences or viewing statistics).
-Encapsulate the business rules, so that the endpoint is only responsible for handling the HTTP request.
+    Process mutant detection business logic.
+    Use the DNA repository to access the database (for example, saving new sequences or viewing statistics).
+    Encapsulate the business rules, so that the endpoint is only responsible for handling the HTTP request.
 
 3. Repository
-In the hexagonal architecture, the repository acts as the adapter to access the database. There are two types of repositories in the project:
+    In the hexagonal architecture, the repository acts as the adapter to access the database. There are two types of repositories in the project:
 
-Abstract Repository (Interface or Port): It is an interface in core/mutant/ports/repository.py, which defines the methods that specific repositories must implement. This allows business logic to depend on an abstraction rather than a specific implementation, making it easier to test and change the database if necessary.
-Concrete Repository: It is the implementation of the abstract repository interface and is located in adapters/database/repository/dna_repository.py. This particular repository handles direct interaction with the database, such as saving and retrieving DNA sequences.
+    Abstract Repository (Interface or Port): It is an interface in core/mutant/ports/repository.py, which defines the methods that specific repositories must implement. This allows business logic to depend on an abstraction rather than a specific implementation, making it easier to test and change the database if necessary.
+    Concrete Repository: It is the implementation of the abstract repository interface and is located in adapters/database/repository/dna_repository.py. This particular repository handles direct interaction with the database, such as saving and retrieving DNA sequences.
 
-Repository Responsibilities:
+    Repository Responsibilities:
 
-The concrete repository (DNARepository) implements database operations, such as creating DNA records and querying statistics.
-The service (MutantService) uses the abstract repository to access the database, allowing you to change the concrete implementation without modifying the service logic.
+    The concrete repository (DNARepository) implements database operations, such as creating DNA records and querying statistics.
+    The service (MutantService) uses the abstract repository to access the database, allowing you to change the concrete implementation without modifying the service logic.
 
-Interaction Flow between Layers
+    Interaction Flow between Layers
 
-HTTP Request: The client sends an HTTP request to the /mutant/ endpoint, passing a DNA sequence.
-Endpoint: The endpoint receives the request, validates the data and calls MutantService.
-Service: MutantService processes the logic to check if the DNA is mutant. During this process, you can call the repository to save the sequence to the database or check if it already exists.
-Repository: MutantService uses the abstract repository, which is implemented by the concrete repository DNARepository, to interact with the database.
-Answer: The service returns the result to the endpoint, and the endpoint sends an HTTP response to the client, indicating whether the DNA is a mutant or not.
+    HTTP Request: The client sends an HTTP request to the /mutant/ endpoint, passing a DNA sequence.
+    Endpoint: The endpoint receives the request, validates the data and calls MutantService.
+    Service: MutantService processes the logic to check if the DNA is mutant. During this process, you can call the repository to save the sequence to the database or check if it already exists.
+    Repository: MutantService uses the abstract repository, which is implemented by the concrete repository DNARepository, to interact with the database.
+    Answer: The service returns the result to the endpoint, and the endpoint sends an HTTP response to the client, indicating whether the DNA is a mutant or not.
 
 
 ## Configuration and Execution
 # Prerequisites
--Python 3.8+
+- Python 3.8+
 - PostgreSQL (for database)
 - Alembic (for migrations)
 
