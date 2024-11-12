@@ -92,3 +92,8 @@
   coverage run -m pytest
 - to see coverage use:
   coverage report
+
+## PRODUCTION
+To test the deployed app, access:
+- https://mutant-challenge-production.up.railway.app/docs#
+Here the backend is already deployed using free services, such as a database and so on, the endpoints are available to be used.
