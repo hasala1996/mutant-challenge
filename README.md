@@ -9,6 +9,7 @@
 
 ##  Basic Project Structure
 
+```
 ├── app/
 │   ├── adapters/               # Infrastructure adapters (DB, API)
 │   │   ├── api/                # Adapter for APIs (endpoints)
@@ -26,7 +27,7 @@
 │   ├── alembic                 # Alembic configuration
 ├── .env                        # Environment variables
 └── README.md                   # README file
-
+```
 
 # Hexagonal Architecture
 
