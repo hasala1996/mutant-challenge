@@ -5,10 +5,23 @@ from adapters.database.repository.dna_repository import DNARepository
 
 class MutantService:
     def __init__(self, dna_repository: DNARepository):
+        """
+        Initializes the MutantService with a DNA repository.
+
+        :param dna_repository: An instance of DNARepository for accessing DNA records.
+        """
         self.dna_repository = dna_repository
 
     def is_mutant(self, dna: List[str]) -> bool:
-        """Verifica si una secuencia de ADN es mutante"""
+        """
+        Determines if a given DNA sequence belongs to a mutant.
+
+        This method checks for specific patterns within the DNA sequences to identify mutant characteristics
+        based on horizontal, vertical, and diagonal alignments.
+
+        :param dna: A list of strings, each representing a row in the DNA matrix.
+        :return: True if the DNA sequence is identified as mutant, False otherwise.
+        """
 
         def has_sequence(line):
             return any(
@@ -49,7 +62,15 @@ class MutantService:
         return False
 
     def check_and_save_dna(self, dna: List[str]) -> bool:
-        """Verifica si la secuencia de ADN es mutante y la guarda en la base de datos si es nueva"""
+        """
+        Checks if the provided DNA sequence is mutant and saves it to the database if it's new.
+
+        If the DNA sequence doesn't exist in the database, it will be saved along with its classification
+        as mutant or human. If it exists, the method returns its current classification.
+
+        :param dna: A list of strings, each representing a row in the DNA matrix.
+        :return: True if the DNA sequence is mutant, False otherwise.
+        """
 
         dna_sequence = "".join(dna)
         existing_dna = self.dna_repository.get_dna_by_sequence(dna_sequence)
@@ -61,6 +82,14 @@ class MutantService:
         return is_mutant_flag
 
     def get_stats(self):
+        """
+        Retrieves statistics about the DNA records in the database.
+
+        The statistics include the count of mutant and human DNA sequences,
+        along with the ratio of mutants to total DNA sequences analyzed.
+
+        :return: A dictionary containing counts of mutant and human DNA, and the mutant-to-total ratio.
+        """
         count_mutant_dna = self.dna_repository.count_mutants()
         count_human_dna = self.dna_repository.count_humans()
         total = count_mutant_dna + count_human_dna
