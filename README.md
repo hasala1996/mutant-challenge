@@ -86,7 +86,7 @@
   alembic upgrade head
 
 ## Running the app
-- To start the application in development mode, use the following command within app:
+- To start the application in development mode, use the following command within app folder :
   uvicorn fast_api.fast_api_app:create_app --reload --port 8001
 - To run the tests, use the following command:
   coverage run -m pytest
