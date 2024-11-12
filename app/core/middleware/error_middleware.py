@@ -32,7 +32,7 @@ class ErrorHandlingMiddleware(BaseHTTPMiddleware):
         except ValidationError as exc:
             logging.error("ValidationError %s: ", exc)
             return JSONResponse(
-                {"message": str(exc.detail), "code": "ValidationError"},
+                {"message": "Validation error", "code": "ValidationError"},
                 status_code=exc.status_code,
             )
         except IntegrityError as exc:
@@ -44,7 +44,7 @@ class ErrorHandlingMiddleware(BaseHTTPMiddleware):
         except CustomAPIException as exc:
             logging.error("CustomAPIException: %s", exc)
             return JSONResponse(
-                {"message": str(exc.detail), "code": str(exc.status_code)},
+                {"message": "Conctact admin site", "code": str(exc.status_code)},
                 status_code=exc.status_code,
             )
         except Exception as exc:
@@ -52,7 +52,7 @@ class ErrorHandlingMiddleware(BaseHTTPMiddleware):
             return JSONResponse(
                 {
                     "message": "An unexpected error occurred",
-                    "details": str(exc),
+                    "details": "Contact admin site",
                 },
                 status_code=status.HTTP_400_BAD_REQUEST,
             )

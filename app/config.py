@@ -22,7 +22,6 @@ class Settings:
     """
 
     SECRET_KEY: str = os.getenv("SECRET_KEY", "")
-    print("SECRET_KEY", SECRET_KEY)
     DB_USER: str = os.getenv("DB_USER", "")
     DB_PASSWORD: str = os.getenv("DB_PASSWORD", "")
     DB_HOST: str = os.getenv("DB_HOST", "")
